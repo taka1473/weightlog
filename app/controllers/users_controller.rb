@@ -1,11 +1,13 @@
 class UsersController < ApplicationController
   before_action :require_user_logged_in, only: [:show]
+  before_action :correct_user
   
   def show
     @user = User.find(params[:id])
     @weight_latest = weight_latest
     @date_latest = date_latest
     @fluc = fluctuation
+    @date_start = date_start
   end
 
   def new
@@ -46,10 +48,10 @@ class UsersController < ApplicationController
   end
   
   def weight_second_latest
-    if @user.weights.order(created_at: :desc).take(2).last.weight
-      @user.weights.order(created_at: :desc).take(2).last.weight
+    if @user.weights.order(created_at: :desc).limit(1).offset(1).any?
+      @user.weights.order(created_at: :desc).limit(1).offset(1).first.weight
     else
-      weight_latest
+      @user.weight_initial
     end
   end
   
@@ -63,9 +65,9 @@ class UsersController < ApplicationController
   
   def fluctuation
     if weight_latest - weight_second_latest >= 0
-      return '+' + (weight_latest - weight_second_latest).to_s
+      return '+' + (weight_latest - weight_second_latest).round(2).to_s
     else
-      weight_latest - weight_second_latest
+      (weight_latest - weight_second_latest).round(2)
     end
   end
     

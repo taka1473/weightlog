@@ -1,4 +1,5 @@
 class WeightsController < ApplicationController
+  
   def new
     @user = current_user
     @weight = Weight.new
@@ -6,7 +7,7 @@ class WeightsController < ApplicationController
 
   def create
     @user = current_user
-    @weight = current_user.weights.build(weight_params)
+    @weight = @user.weights.build(weight_params)
     if @weight.save
       flash[:success] = '体重を更新しました'
       redirect_to @user
