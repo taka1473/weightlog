@@ -13,7 +13,7 @@
     <div class="offset-sm-2 col-sm-5">
         <p>目標まであと<%= @weight_latest - @user.weight_goal  %>ｋｇ</p>
         <p>前回から<%= @fluc %>ｋｇ</p>
-        <% per = (1 - (@weight_latest - @user.weight_goal)/@user.weight_goal) * 100 %>
+        <% per = (1 - (@weight_latest - @user.weight_goal)/(@user.weight_initial - @user.weight_goal)) * 100 %>
         <p>目標達成率 <%= per.round(2) %> ％</p>
     </div>
 </div>

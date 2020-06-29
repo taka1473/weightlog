@@ -63,7 +63,7 @@ class UsersController < ApplicationController
   
   def fluctuation
     if weight_latest - weight_second_latest >= 0
-      return '+' + weight_latest - weight_second_latest
+      return '+' + (weight_latest - weight_second_latest).to_s
     else
       weight_latest - weight_second_latest
     end

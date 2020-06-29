@@ -1,2 +1,20 @@
-<h1>Weights#new</h1>
-<p>Find me in app/views/weights/new.html.erb</p>
+<div class="mt-5">
+    <h1 class="border-bottom pb-3"><%= @current_user.name %>さん</h1>
+</div>
+
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+
+    <%= form_with(model: @weight, local: true) do |f| %>
+       <%= render 'layouts/error_messages', model: f.object %>
+
+        <div class="form-group form-inline">
+          <%= f.label :weight, '今日の体重：'  %>
+          <%= f.text_field :weight, class: 'form-control' %>
+          <span class="ml-3">ｋｇ</span>
+          <%= f.submit '登録', class: 'btn btn-success btn-lg' %>
+        </div>
+      
+    <% end %>
+  </div>
+</div>
