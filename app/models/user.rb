@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+    before_save {self.emal.downcase!}
     validates :name, presence: true, length: {maximum: 50}
     validates :email, presence: true, length: { maximum: 255 },
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i },
@@ -9,4 +10,5 @@ class User < ApplicationRecord
     validates :height, presence: true, numericality: {greater_than: 0}
     
     has_secure_password
+    has_many :weights
 end

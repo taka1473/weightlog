@@ -1,2 +1,19 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div class="mt-5">
+    <h1 class="border-bottom pb-3"><%= @user.name %>さん</h1>
+</div>
+
+<div class="row border-bottom p-3">
+    <div class="col-sm-5">
+        <p><%= @date_latest %></p>
+        <p><%= @weight_latest %> kg</p>
+        <div class="text-right">
+            <%= link_to "体重を更新", new_weight_path, class: 'btn btn-success btn-lg' %>
+        </div>
+    </div>
+    <div class="offset-sm-2 col-sm-5">
+        <p>目標まであと<%= @weight_latest - @user.weight_goal  %>ｋｇ</p>
+        <p>前回から<%= @fluc %>ｋｇ</p>
+        <% per = (1 - (@weight_latest - @user.weight_goal)/@user.weight_goal) * 100 %>
+        <p>目標達成率 <%= per.round(2) %> ％</p>
+    </div>
+</div>
