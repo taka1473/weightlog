@@ -27,9 +27,14 @@
     </div>
     <div class='arrow col-sm-2'></div>
     <div class="col-sm-5 border border-dark rounded">
-        <p><%= @date_latest %>（登録時）</p>
+        <p><%= @date_latest %>（最終更新時）</p>
         <p class="row"><span class="col-sm-4 text-right" style="font-size:20px;">体重</span><span style="font-size:60px;" class="col-sm-3"><%= @weight_latest %></span><span class="col-sm-5" style="font-size:20px; margin-top:45px">kg</span></p>
         <% bmi_initial = @weight_latest / (@user.height * @user.height) * 10000 %>
         <p class="row"><span class="col-sm-4 text-right" style="font-size:20px;">BMI</span><span style="font-size:60px;" class="col-sm-8"><%= bmi_initial.round(2) %></span></p>
     </div>
+</div>
+
+<div style="margin:80px 0 40px">
+    <h2>体重の推移</h2>
+<%= line_chart @data, width: "800px", height: "500px" %>
 </div>

@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     @date_latest = date_latest
     @fluc = fluctuation
     @date_start = date_start
+    @data = Weight.where(user_id: @user.id).group(:created_at).sum(:weight)
   end
 
   def new
