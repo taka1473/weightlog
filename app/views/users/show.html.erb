@@ -1,40 +1,61 @@
-<div class="border-bottom mt-5 row">
-    <span class="col-sm-7" style="font-size:53px; font-weight:bold;"><%= @user.name %>さん</span>
-    <span class="col-sm-5 row d-flex align-items-end"><span class="col-sm-4" style="font-size:20px;">目標体重:</span><span class="col-sm-8 text-center" style="font-size:53px; font-weight:bold;"><%= @user.weight_goal %>kg</span></span>
+<div class="f-container" id="profile">
+    <div class="f-item" id="user-name"><%= @user.name %>さん</div>
+    <div class="f-item">
+        <div class="profile-item">目標体重: <span><%= @user.weight_goal %></span>kg</div>
+        <div class="profile-item">身長: <span><%= @user.height %></span>cm</div>
+    </div>
 </div>
 
-<div class="row border-bottom pt-5 pb-5">
-    <div class="col-sm-5">
+<div class="f-container" id="content">
+    <div class="f-item">
         <p><%= Date.today.strftime("%Y-%m-%d") %>現在</p>
-        <p style="font-size:120px; margin-left:80px;"><%= @weight_latest %><span style="font-size:20px; margin-left:5px; color:#FF7300;">kg</span></p>
-        <div class="text-right">
+        <p class="weight_latest"><%= @weight_latest %><span class="unit">kg</span></p>
+        <div class="button">
             <%= link_to "体重を更新", new_weight_path, class: 'btn btn-success btn-lg' %>
         </div>
     </div>
-    <div class="offset-sm-2 col-sm-5">
-        <p class="row"><span class="col-sm-4" style="color:#FF7300;">目標まであと</span><span style="font-size:53px;" class="col-sm-4 text-right"><%= (@weight_latest - @user.weight_goal).round(2) %></span><span class="col-sm-4 align-bottom" style="margin-top:40px; color:#FF7300;">kg</span></p>
-        <p class="row"><span class="col-sm-4" style="color:#FF7300;">前回から</span><span style="font-size:53px" class="col-sm-4 text-right"><%= @fluc %></span><span class="col-sm-4" style="margin-top:40px; color:#FF7300;">kg</span></p>
-        <% per = (1 - (@weight_latest - @user.weight_goal)/(@user.weight_initial - @user.weight_goal)) * 100 %>
-        <p class="row"><span class="col-sm-4" style="color:#FF7300;">目標達成率</span><span style="font-size:53px" class="col-sm-4 text-right"><%= per.round(2) %></span><span class="col-sm-4" style="margin-top:40px; color:#FF7300;">%</span></p>
+    <div class="f-item">
+        <div class="content-item">
+            <p class="label">目標まであと</p>
+            <p class="number"><%= (@weight_latest - @user.weight_goal).round(2) %><span class="unit">kg</span></p>
+        </div>
+        <div class="content-item">
+            <p class="label">前回から</p>
+            <p class="number"><%= @fluc %><span class="unit">kg</span></p>
+        </div>
+        <div class="content-item">
+            <p class="label">目標達成率</p>
+            <% per = (1 - (@weight_latest - @user.weight_goal)/(@user.weight_initial - @user.weight_goal)) * 100 %>
+            <p class="number"><%= per.round(2) %><span class="unit">%</span></p>
+        </div>
     </div>
 </div>
-<div class="row" style="margin-top:100px;">
-    <div class="col-sm-5 border border-dark rounded">
+<div class="f-container" id="dif">
+    <div class="f-item-40 border border-dark rounded">
         <p><%= @date_start %>（登録時）</p>
-        <p class="row"><span class="col-sm-4 text-right" style="font-size:20px; color:#FF7300">体重</span><span style="font-size:60px;" class="col-sm-3"><%= @user.weight_initial %></span><span class="col-sm-5" style="font-size:20px; margin-top:45px; color:#FF7300">kg</span></p>
+        <p class="label">体重</p>
+        <p class="number"><%= @user.weight_initial %><span class="unit">kg</span></p>
+        <p class="label">BMI</p>
         <% bmi_initial = @user.weight_initial / (@user.height * @user.height) * 10000 %>
-        <p class="row"><span class="col-sm-4 text-right" style="font-size:20px; color:#FF7300">BMI</span><span style="font-size:60px;" class="col-sm-8"><%= bmi_initial.round(2) %></span></p>
+        <p class="number"><%= bmi_initial.round(2) %></p>
     </div>
-    <div class='arrow col-sm-2'></div>
-    <div class="col-sm-5 border border-dark rounded">
+    <div class='f-item-20'>
+        <span class="arrow-right"><i class="fas fa-arrow-right fa-7x"></i></span>
+        <span class="arrow-down"><i class="fas fa-arrow-down fa-5x"></i></span>
+    </div>
+    <div class="f-item-40 border border-dark rounded">
         <p><%= @date_latest %>（最終更新時）</p>
-        <p class="row"><span class="col-sm-4 text-right" style="font-size:20px; color:#FF7300">体重</span><span style="font-size:60px;" class="col-sm-3"><%= @weight_latest %></span><span class="col-sm-5" style="font-size:20px; margin-top:45px; color:#FF7300">kg</span></p>
-        <% bmi_initial = @weight_latest / (@user.height * @user.height) * 10000 %>
-        <p class="row"><span class="col-sm-4 text-right" style="font-size:20px; color:#FF7300">BMI</span><span style="font-size:60px;" class="col-sm-8"><%= bmi_initial.round(2) %></span></p>
+        <p class="label">体重</p>
+        <p class="number"><%= @weight_latest %><span class="unit">kg</span></p>
+        <p class="label">BMI</p>
+        <% bmi_latest = @weight_latest / (@user.height * @user.height) * 10000 %>
+        <p class="number"><%= bmi_latest.round(2) %></p>
     </div>
 </div>
 
-<div style="margin:80px 0 40px">
+<div id="chart">
     <h2 style="color:#FF7300">体重の推移</h2>
-<%= line_chart @data, width: "800px", height: "500px" %>
+    <div class="chart">
+        <%= line_chart @data %>
+    </div>
 </div>

@@ -1,0 +1,180 @@
+/*　flex-box */
+.f-container{
+    display:flex;
+    flex-wrap:wrap;
+}
+
+.f-container .f-item{
+    flex:auto;
+    width:50%;
+}
+
+
+/* profile */
+#user-name{
+    font-size:55px; 
+    font-weight:bold;
+}
+
+#profile{
+    border-bottom: solid 1px #ccc;
+}
+
+.profile-item{
+    font-size:20px;
+    padding-left:30px;
+    display:inline-block;
+}
+
+.profile-item span{
+    font-size:55px;
+    font-weight:bold;
+}
+
+
+/* content */
+#content{
+    margin:50px 0;
+    border-bottom: solid 1px #ccc;
+}
+
+#content .f-item{
+    padding:0 40px;
+}
+
+.number{
+    font-size:55px;
+}
+
+
+.label{
+    color:#FF7300;
+    font-weight:bold;
+}
+
+.weight_latest{
+    font-size:150px; 
+    font-weight:bold;
+    margin-left:80px;
+    text-align:center;
+}
+
+.unit{
+    font-size:30px; 
+    padding-left:10px;
+    margin-top:40px;
+    color:#FF7300;
+}
+
+.button{
+    text-align:right;
+}
+
+.content-item .label{
+    padding-left:50px;
+}
+
+.content-item .number{
+    text-align:right;
+    padding-right:120px;
+}
+
+
+/* difference */
+.f-item-40{
+    flex:auto;
+    width:40%;
+    padding-bottom:30px;
+}
+
+.f-item-20{
+    flex:auto;
+    width:20%;
+    text-align:center;
+}
+
+
+#dif .label{
+    padding-left:90px;
+}
+
+#dif .number{
+    padding-left:160px;
+}
+
+.fa-arrow-right{
+    margin-top:120px;
+}
+
+.arrow-down{
+    display:none;
+}
+
+#chart{
+    margin-top:80px;
+}
+
+#chart h2{
+    margin-bottom:40px;
+}
+
+.chart{
+    width:80%;
+    height:500px;
+    margin:0 auto;
+}
+
+
+
+
+
+
+/* media-query */
+@media(max-width:1000px){
+    .f-container .f-item{
+       width:100%; 
+    }
+    
+    .profile-item{
+        width:100%;
+        text-align:right;
+    }
+    
+    .weight_latest{
+        font-size:100px;
+        margin-left:0;
+    }
+    
+    .content-item .label{
+        padding-left:0px;
+    }
+    
+    .content-item .number{
+        padding-right:0;
+    }
+    
+    .f-item-40, .f-item-20{
+        width:100%;
+    }
+    
+    #dif .label{
+    padding-left:30px;
+    }
+
+    #dif .number{
+    padding-left:100px;
+    
+    } 
+
+    .arrow-down{
+        display:block;
+    }
+    
+    .arrow-right{
+        display:none;
+    }
+    
+    .fa-arrow-down{
+        margin:40px 0;
+    }
+}
