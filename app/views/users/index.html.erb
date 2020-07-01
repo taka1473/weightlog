@@ -1,0 +1,39 @@
+<h1 id="compare">ユーザー比較ページ</h1>
+
+<table class="table">
+    <tr>
+        <th class="text-center"><span class="user-suffix">ユーザー</span></th>
+        <th class="text-center">目標までの体重</th>
+        <th class="text-center">目標達成率</th>
+        <th class="text-center">最終更新日</th>
+    </tr>
+    <% i = 0 %>
+    <% @users.each do |u| %>
+        <% if u.weights.any? %>
+            <% weight_latest = u.weights.last.weight %>
+            <% date_latest = u.weights.last.created_at.strftime('%Y/%m/%d') %>
+        <% else %>
+            <% weight_latest = u.weight_initial %>
+            <% date_latest = '--' %>
+        <% end %>
+        <% per = (1 - (weight_latest - u.weight_goal)/(u.weight_initial - u.weight_goal)) * 100 %>
+        
+        
+        <tr>
+            <% unless u.id == current_user.id %>
+                <% i += 1 %>
+                <td class="text-center"><span class="user-suffix">ユーザー</span><%= i %></td>
+                <td class="text-right"><%= (weight_latest - u.weight_goal).round(2) %>kg</td>
+                <td class="text-right"><%= per.round(2) %>%</td>
+                <td class="text-right"><%= date_latest %></td>
+            <% else %>
+                <td class="text-center user"><span class="user-suffix"><%= u.name %>さん</span><span class="you">you</span></td>
+                <td class="text-right user"><%= (weight_latest - u.weight_goal).round(2) %>kg</td>
+                <td class="text-right user"><%= per.round(2) %>%</td>
+                <td class="text-right user"><%= date_latest %></td>
+            <% end %>
+                
+        </tr>
+    <% end %> 
+</table>
+

@@ -1,0 +1,38 @@
+.table{
+    margin-top:100px;
+    background-color:#f9f9f9;
+}
+
+th{
+    color:#FF7300;
+}
+
+.user{
+    font-weight:bold;
+}
+
+#compare{
+    text-align:center;
+}
+
+.you{
+    display:none;
+}
+
+@media(max-width:1000px){
+    .user-suffix{
+    display:none;
+}
+
+    .you{
+        display:block;
+    }
+    
+    #compare{
+        font-size:30px;
+    }
+    
+    .table{
+        margin-top:30px;
+    }
+}
